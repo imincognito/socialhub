@@ -1,0 +1,159 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Setup Admin - Social Hub</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            margin: 0;
+            padding: 20px;
+        }
+        .container {
+            background: white;
+            padding: 40px;
+            border-radius: 16px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+            max-width: 500px;
+            width: 100%;
+        }
+        h1 {
+            color: #333;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #666;
+            margin-bottom: 30px;
+        }
+        button {
+            width: 100%;
+            padding: 14px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        button:hover {
+            transform: translateY(-2px);
+        }
+        button:disabled {
+            opacity: 0.6;
+            cursor: not-allowed;
+            transform: none;
+        }
+        #result {
+            margin-top: 20px;
+            padding: 16px;
+            border-radius: 8px;
+            display: none;
+        }
+        .success {
+            background: #d4edda;
+            color: #155724;
+            border: 1px solid #c3e6cb;
+        }
+        .error {
+            background: #f8d7da;
+            color: #721c24;
+            border: 1px solid #f5c6cb;
+        }
+        .info {
+            background: #f7fafc;
+            padding: 16px;
+            border-radius: 8px;
+            margin-top: 20px;
+            border-left: 4px solid #667eea;
+        }
+        .info strong {
+            display: block;
+            margin-bottom: 8px;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Setup Admin Account</h1>
+        <p>This will create a demo admin account for testing purposes.</p>
+
+        <button id="setupBtn">Create Admin Account</button>
+
+        <div id="result"></div>
+
+        <div class="info">
+            <strong>Demo Admin Credentials:</strong>
+            Email: admin@demo.com<br>
+            Password: admin123
+        </div>
+    </div>
+
+    <script type="module">
+        import { supabase } from './src/supabaseClient.js';
+
+        document.getElementById('setupBtn').addEventListener('click', async () => {
+            const btn = document.getElementById('setupBtn');
+            const result = document.getElementById('result');
+
+            btn.disabled = true;
+            btn.textContent = 'Creating...';
+            result.style.display = 'none';
+
+            try {
+                const { data: authData, error: signUpError } = await supabase.auth.signUp({
+                    email: 'admin@demo.com',
+                    password: 'admin123',
+                });
+
+                if (signUpError) {
+                    if (signUpError.message.includes('already registered')) {
+                        result.textContent = 'Admin account already exists! You can use the credentials to login.';
+                        result.className = 'success';
+                        result.style.display = 'block';
+                        btn.textContent = 'Already Exists';
+                        return;
+                    }
+                    throw signUpError;
+                }
+
+                const { error: profileError } = await supabase
+                    .from('profiles')
+                    .insert([{
+                        id: authData.user.id,
+                        username: 'admin',
+                        full_name: 'Admin User',
+                        bio: 'System Administrator',
+                        is_admin: true,
+                        avatar_url: 'https://ui-avatars.com/api/?name=Admin+User&background=667eea&color=fff&size=200',
+                    }]);
+
+                if (profileError) throw profileError;
+
+                result.textContent = 'Admin account created successfully! You can now login with the credentials above.';
+                result.className = 'success';
+                result.style.display = 'block';
+                btn.textContent = 'Success!';
+
+                setTimeout(() => {
+                    window.location.href = './admin-login.html';
+                }, 2000);
+
+            } catch (error) {
+                result.textContent = 'Error: ' + error.message;
+                result.className = 'error';
+                result.style.display = 'block';
+                btn.disabled = false;
+                btn.textContent = 'Try Again';
+            }
+        });
+    </script>
+</body>
+</html>

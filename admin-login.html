@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Login - Social Hub</title>
+    <link rel="stylesheet" href="./src/styles/auth.css">
+</head>
+<body>
+    <div class="auth-container">
+        <div class="auth-card">
+            <div class="auth-header">
+                <h1>Social Hub</h1>
+                <p>Admin Portal</p>
+            </div>
+
+            <form id="adminLoginForm" class="auth-form">
+                <h2>Admin Login</h2>
+
+                <div class="form-group">
+                    <label for="email">Admin Email</label>
+                    <input type="email" id="email" required placeholder="admin@socialhub.com">
+                </div>
+
+                <div class="form-group">
+                    <label for="password">Password</label>
+                    <input type="password" id="password" required placeholder="Enter admin password">
+                </div>
+
+                <div id="errorMessage" class="error-message"></div>
+
+                <button type="submit" class="btn-primary">Login as Admin</button>
+
+                <div class="auth-switch">
+                    <a href="./login.html">Back to regular login</a>
+                </div>
+
+                <div class="demo-info">
+                    <strong>Demo Admin Credentials:</strong><br>
+                    Email: admin@demo.com<br>
+                    Password: admin123
+                </div>
+            </form>
+        </div>
+    </div>
+
+    <script type="module" src="./src/auth/admin-login.js"></script>
+</body>
+</html>

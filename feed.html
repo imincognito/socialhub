@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Feed - Social Hub</title>
+    <link rel="stylesheet" href="./src/styles/main.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>Social Hub</h1>
+            </div>
+            <div class="nav-links">
+                <a href="./feed.html" class="nav-link active">Feed</a>
+                <a href="./profile.html" class="nav-link">My Profile</a>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="feed-layout">
+            <aside class="sidebar">
+                <div class="user-card">
+                    <img id="sidebarAvatar" class="avatar-large" src="" alt="Avatar">
+                    <h3 id="sidebarUsername"></h3>
+                    <p id="sidebarBio"></p>
+                    <a href="./profile.html" class="btn-link">View Profile</a>
+                </div>
+            </aside>
+
+            <main class="main-content">
+                <div class="create-post-card">
+                    <h2>Share Your Moment</h2>
+                    <form id="createPostForm">
+                        <textarea id="postContent" placeholder="What's on your mind?" required rows="3"></textarea>
+                        <div class="form-row">
+                            <input type="url" id="postImage" placeholder="Image URL (optional)">
+                            <button type="submit" class="btn-primary">Post</button>
+                        </div>
+                    </form>
+                </div>
+
+                <div class="posts-section">
+                    <h2>Latest Posts</h2>
+                    <div id="postsContainer" class="posts-container">
+                        <div class="loading">Loading posts...</div>
+                    </div>
+                </div>
+            </main>
+        </div>
+    </div>
+
+    <script type="module" src="./src/pages/feed.js"></script>
+</body>
+</html>

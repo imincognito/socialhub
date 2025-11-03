@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Dashboard - Social Hub</title>
+    <link rel="stylesheet" href="./src/styles/main.css">
+    <link rel="stylesheet" href="./src/styles/admin.css">
+</head>
+<body>
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <h1>Social Hub - Admin</h1>
+            </div>
+            <div class="nav-links">
+                <a href="./admin.html" class="nav-link active">Dashboard</a>
+                <a href="./feed.html" class="nav-link">View Feed</a>
+                <button id="logoutBtn" class="btn-secondary">Logout</button>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <div class="admin-layout">
+            <div class="stats-grid">
+                <div class="stat-card">
+                    <h3>Total Users</h3>
+                    <p class="stat-number" id="totalUsers">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Posts</h3>
+                    <p class="stat-number" id="totalPosts">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Likes</h3>
+                    <p class="stat-number" id="totalLikes">-</p>
+                </div>
+                <div class="stat-card">
+                    <h3>Total Comments</h3>
+                    <p class="stat-number" id="totalComments">-</p>
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <h2>All Users</h2>
+                <div id="usersContainer" class="table-container">
+                    <table class="data-table">
+                        <thead>
+                            <tr>
+                                <th>Username</th>
+                                <th>Full Name</th>
+                                <th>Email</th>
+                                <th>Admin</th>
+                                <th>Joined</th>
+                            </tr>
+                        </thead>
+                        <tbody id="usersTableBody">
+                            <tr><td colspan="5" class="loading">Loading users...</td></tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+            <div class="admin-section">
+                <h2>All Posts</h2>
+                <div id="adminPostsContainer" class="posts-container">
+                    <div class="loading">Loading posts...</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script type="module" src="./src/pages/admin.js"></script>
+</body>
+</html>
