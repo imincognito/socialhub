@@ -61,6 +61,6 @@ signupForm.addEventListener('submit', async (e) => {
 (async () => {
     const { data: { session } } = await supabase.auth.getSession();
     if (session) {
-        window.location.href = './feed.html';
+        window.location.href = 'https://imincognito.github.io/socialhub/feed.html';
     }
 })();
