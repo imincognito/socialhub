@@ -56,7 +56,7 @@ adminLoginForm.addEventListener('submit', async (e) => {
             .maybeSingle();
 
         if (profile && profile.is_admin) {
-            window.location.href = './admin.html';
+            window.location.href = 'https://imincognito.github.io/socialhub/admin.html';
         }
     }
 })();
